@@ -20,6 +20,7 @@ var React = require('react');
 var ReactInstanceMap = require('react/lib/ReactInstanceMap');
 var ReactMultiChild = require('react/lib/ReactMultiChild');
 var ReactUpdates = require('react/lib/ReactUpdates');
+var ReactDOM = require('react-dom');
 
 var assign = require('react/lib/Object.assign');
 var emptyObject = require('fbjs/lib/emptyObject');
@@ -186,7 +187,7 @@ var Surface = React.createClass({
   mixins: [ContainerMixin],
 
   componentDidMount: function() {
-    var domNode = this.getDOMNode();
+    var domNode = ReactDOM.findDOMNode(this);
 
     this.node = Mode.Surface(+this.props.width, +this.props.height, domNode);
 

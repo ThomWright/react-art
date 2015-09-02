@@ -18,6 +18,7 @@ require('mock-modules')
 
 var React;
 var ReactTestUtils;
+var ReactDOM;
 
 var Group;
 var Shape;
@@ -51,6 +52,7 @@ describe('ReactART', function() {
   beforeEach(function() {
     React = require('react');
     ReactTestUtils = require('react/lib/ReactTestUtils');
+    ReactDOM = require('react-dom');
 
     var ReactART = require('ReactART');
     var ARTSVGMode = require('art/modes/svg');
@@ -138,7 +140,7 @@ describe('ReactART', function() {
       ]
     };
 
-    var realNode = instance.getDOMNode();
+    var realNode = ReactDOM.findDOMNode(instance);
     testDOMNodeStructure(realNode, expectedStructure);
   });
 
@@ -162,7 +164,7 @@ describe('ReactART', function() {
       ]
     };
 
-    var realNode = instance.getDOMNode();
+    var realNode = ReactDOM.findDOMNode(instance);
     testDOMNodeStructure(realNode, expectedStructure);
 
     instance.setProps({ flipped: true });
@@ -256,9 +258,9 @@ describe('ReactART', function() {
       }
     });
     var container = document.createElement('div');
-    React.render(<Outer />, container);
+    ReactDOM.render(<Outer />, container);
     expect(ref).not.toBeDefined();
-    React.render(<Outer mountCustomShape={true} />, container);
+    ReactDOM.render(<Outer mountCustomShape={true} />, container);
     expect(ref.constructor).toBe(CustomShape);
   });
 
